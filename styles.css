@@ -45,12 +45,23 @@ header {
     height: 100vh;
 }
 
+.number {
+    position: absolute;
+    font-size: 16px;
+    color: #333;
+    transform: translate(-50%, -50%);
+    user-select: none; /* Prevent user selection */
+}
+
 #clock {
     width: 200px;
     height: 200px;
     border: 10px solid #333;
     border-radius: 50%;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #hand {
@@ -62,11 +73,4 @@ header {
     left: 50%;
     transform-origin: left center;
     transform: rotate(0deg);
-}
-
-.number {
-    position: absolute;
-    font-size: 16px;
-    color: #333;
-    transform: translate(-50%, -50%);
 }
