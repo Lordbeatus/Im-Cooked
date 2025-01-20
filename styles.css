@@ -1,13 +1,38 @@
-/* styles.css */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    padding: 0;
 }
 
-h1 {
-    color: #4CAF50;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
 }
 
-p {
-    font-size: 16px;
+.logo h1 {
+    margin: 0;
+}
+
+.utility-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.utility-nav li {
+    margin-left: 20px;
+}
+
+.utility-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.utility-nav a:hover {
+    text-decoration: underline;
 }
