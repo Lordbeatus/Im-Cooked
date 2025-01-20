@@ -1,5 +1,6 @@
 const hand = document.getElementById('hand');
 let angle = 0;
+const sensitivityFactor = 2;
 
 hand.addEventListener('mousedown', startDrag);
 
@@ -14,8 +15,8 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI);
-    hand.style.transform = `rotate(${angle}deg)`;
+    angle = Math.atan2(dy, dx) * (180 / Math.PI); //angle
+    hand.style.transform = `rotate(${angle/sensitivityFactor}deg)`; //Updates the sensitivity
 }
 
 function stopDrag(event) {
