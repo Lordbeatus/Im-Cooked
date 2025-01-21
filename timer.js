@@ -1,6 +1,8 @@
 const hand = document.getElementById('hand');
 let angle = 0;
 
+// Ensure the hand starts at 12:00
+hand.style.transform = `rotate(${angle}deg)`;
 
 hand.addEventListener('mousedown', startDrag);
 
@@ -15,12 +17,13 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    const newAngle = Math.atan2(dy, dx) * (180 / Math.PI); // Calculate new angle
+    let newAngle = Math.atan2(dy, dx) * (180 / Math.PI); // Calculate new angle
+
     if (newAngle < 0) {
-        angle += (newAngle + 360) - angle; // Adjust angle for full rotation
-    } else {
-        angle += newAngle - angle; // Adjust angle for positive rotation
+        newAngle += 360; // Adjust angle for full rotation
     }
+
+    angle = newAngle;
     hand.style.transform = `rotate(${angle}deg)`; // Update the hand rotation
 }
 
