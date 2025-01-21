@@ -17,11 +17,14 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI); // Subtract 90 to start at 12:00
-    if (angle < 0) {
-        angle += 360;
-    }
-    hand.style.transform = `rotate(${angle}deg)`; // Update the hand rotation
+    
+    angle = Math.atan2(dy, dx) * (180 / Math.PI); // Get the angle in degrees
+
+    // Adjust for clockwise rotation: Adding 90 degrees to start at 12:00
+    angle = (angle + 90) % 360; // Normalize to 0-360 range
+    
+    // Setting angle in transform
+    hand.style.transform = `rotate(${angle}deg)`; 
 }
 
 function stopDrag(event) {
@@ -29,7 +32,9 @@ function stopDrag(event) {
     document.removeEventListener('mouseup', stopDrag);
 }
 
+// Correct the minutes calculation based on the angle
 document.getElementById('start-timer').addEventListener('click', () => {
-    const minutes = Math.round(angle / 30) * 5 + 15;
+    // Convert angle to minutes, 30 degrees corresponds to 5 minutes (360°/60min)
+    const minutes = Math.round(angle / 6); // Since 360° / 60 is 6°
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 });
