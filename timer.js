@@ -1,8 +1,8 @@
 const hand = document.getElementById('hand');
-let angle = 0;
+let angle = -90;
 
 // Ensure the hand starts at 12:00
-hand.style.transform = `rotate(${angle - 90}deg)`; // Adjust initial position by -90 degrees
+hand.style.transform = `rotate(${angle}deg)`; // Adjust initial position by -90 degrees
 
 hand.addEventListener('mousedown', startDrag);
 
@@ -30,6 +30,6 @@ function stopDrag(event) {
 }
 
 document.getElementById('start-timer').addEventListener('click', () => {
-    const minutes = Math.round(angle / 30) * 5;
+    const minutes = Math.round(angle / 30) * 5 + 15;
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 });
