@@ -1,9 +1,10 @@
 const hand = document.getElementById('hand');
-let angle = -90;
+let angle = -90; // Starting at 12:00
 
-// Ensure the hand starts at 12:00
-hand.style.transform = `rotate(${angle}deg)`; // Adjust initial position by -90 degrees
+// Update the hand's initial position
+hand.style.transform = `rotate(${angle}deg)`;
 
+// Handling interactions
 hand.addEventListener('mousedown', startDrag);
 
 function startDrag(event) {
@@ -17,14 +18,31 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    
-    angle = Math.atan2(dy, dx) * (180 / Math.PI); // Get the angle in degrees
 
-    // Adjust for clockwise rotation: Adding 90 degrees to start at 12:00
-    angle = (angle + 90) % 360; // Normalize to 0-360 range
+    // Calculate the new angle
+    let newAngle = Math.atan2(dy, dx) * (180 / Math.PI); // Get angle in degrees
+
+    // Normalize the angle and adjust for starting position
+    newAngle = (newAngle + 90) % 360; // Normalize to [0, 360)
     
-    // Setting angle in transform
-    hand.style.transform = `rotate(${angle}deg)`; 
+    // Update the angle without jittering
+    // Prevent large jumps when crossing the 0° mark
+    if (Math.abs(newAngle - angle) > 180) {
+        if (newAngle > angle) {
+            newAngle -= 360; // Go to negative range
+        } else {
+            newAngle += 360; // Go to positive range
+        }
+    }
+
+    // Update the angle
+    angle = newAngle;
+    hand.style.transform = `rotate(${angle}deg)`; // Apply rotation
+    
+    // Calculate minutes based on the angle
+    const minutes = Math.round((newAngle / 360) * 60); // Normalize to [0, 60) minutes
+    if (minutes === 60) minutes = 0; // Handle 12:00 case
+    document.getElementById('time-display').innerText = `Timer set to ${minutes} minutes`;
 }
 
 function stopDrag(event) {
@@ -32,9 +50,5 @@ function stopDrag(event) {
     document.removeEventListener('mouseup', stopDrag);
 }
 
-// Correct the minutes calculation based on the angle
-document.getElementById('start-timer').addEventListener('click', () => {
-    // Convert angle to minutes, 30 degrees corresponds to 5 minutes (360°/60min)
-    const minutes = Math.round(angle / 6); // Since 360° / 60 is 6°
-    document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
-});
+// Initial timer display
+document.getElementById('time-display').innerText = `Timer set to 0 minutes`;
