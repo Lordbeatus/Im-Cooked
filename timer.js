@@ -31,6 +31,9 @@ function drag(event) {
         angle += 360;
     }
 
+    // Restrict the angle to a maximum of 360°
+    angle = Math.min(angle, 360);
+
     // Update the hand rotation
     hand.style.transform = `rotate(${angle}deg)`;
 }
@@ -45,6 +48,5 @@ function stopDrag(event) {
 document.getElementById('start-timer').addEventListener('click', () => {
     // Convert angle to minutes
     const minutes = Math.round(angle / 30) * 5; // 30 degrees per hour, 5 minutes per increment
-    const adjustedMinutes = minutes === 65 ? 5 : minutes; // Map 60 minutes back to 0 for 12:00
-    document.getElementById('time-display').innerText = `Timer set for ${adjustedMinutes} minutes`;
+    document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 });
