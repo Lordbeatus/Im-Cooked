@@ -58,12 +58,8 @@ document.getElementById('start-timer').addEventListener('click', () => {
 
 //Countdown timer logic
 
-let deadline = new Date().getTime() + (minutes * 1000 * 60);
-
 // Calling defined function at certain interval
 let x = setInterval(function () {
-  // Getting current date and time in required format
-  let now = new Date().getTime();
 
   // Calculating difference
   let t = minutes;
