@@ -15,11 +15,13 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI); //angle
-    if (angle < 0) {
-        angle += 360;
+    const newAngle = Math.atan2(dy, dx) * (180 / Math.PI); // Calculate new angle
+    if (newAngle < 0) {
+        angle += (newAngle + 360) - angle; // Adjust angle for full rotation
+    } else {
+        angle += newAngle - angle; // Adjust angle for positive rotation
     }
-    hand.style.transform = `rotate(${angle}deg)`; //Updates the sensitivity
+    hand.style.transform = `rotate(${angle}deg)`; // Update the hand rotation
 }
 
 function stopDrag(event) {
