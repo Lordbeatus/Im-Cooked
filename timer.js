@@ -17,7 +17,7 @@ function drag(event) {
     const centerY = rect.top + rect.height / 2;
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI) - 90; // Subtract 90 to start at 12:00
+    angle = Math.atan2(dy, dx) * (180 / Math.PI); // Subtract 90 to start at 12:00
     if (angle < 0) {
         angle += 360;
     }
