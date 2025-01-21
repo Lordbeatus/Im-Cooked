@@ -1,6 +1,5 @@
 body {
     text-align: center;
-    background: #00ecb9;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -87,7 +86,7 @@ header {
 
 
 /* Styling for heading */
-h1 {
+h2 {
     color: #396;
     font-weight: 100;
     font-size: 40px;
