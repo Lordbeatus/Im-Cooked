@@ -1,6 +1,6 @@
 const hand = document.getElementById('hand');
 let minutes;
-let angle = -90; // Start at 12:00
+let angle = 0; // Start at 12:00
 let isDragging = false; // Track dragging state
 
 // Ensure the hand starts at 12:00
