@@ -1,53 +1,62 @@
 const hand = document.getElementById('hand');
 let angle = -90; // Starting at 12:00
+let centerX, centerY;
+let isDragging = false;
 
 // Update the hand's initial position
 hand.style.transform = `rotate(${angle}deg)`;
 
-// Handling interactions
+// Get the clock's center position
+const clockRect = hand.parentNode.getBoundingClientRect();
+centerX = clockRect.left + clockRect.width / 2;
+centerY = clockRect.top + clockRect.height / 2;
+
 hand.addEventListener('mousedown', startDrag);
+document.addEventListener('mousemove', drag);
+document.addEventListener('mouseup', stopDrag);
 
 function startDrag(event) {
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('mouseup', stopDrag);
+    isDragging = true;
 }
 
 function drag(event) {
-    const rect = hand.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const dx = event.clientX - centerX;
-    const dy = event.clientY - centerY;
-
-    // Calculate the new angle
-    let newAngle = Math.atan2(dy, dx) * (180 / Math.PI); // Get angle in degrees
-
-    // Normalize the angle and adjust for starting position
-    newAngle = (newAngle + 90) % 360; // Normalize to [0, 360)
-    
-    // Update the angle without jittering
-    // Prevent large jumps when crossing the 0° mark
-    if (Math.abs(newAngle - angle) > 180) {
-        if (newAngle > angle) {
-            newAngle -= 360; // Go to negative range
-        } else {
-            newAngle += 360; // Go to positive range
+    if (isDragging) {
+        const mouseRect = hand.getBoundingClientRect();
+        const rect = hand.parentNode.getBoundingClientRect();
+        
+        if (event.clientX !== rect.left + mouseRect.width / 2 || event.clientY !== rect.top + mouseRect.height / 2) {
+            const radianAngle = Math.PI / 180 * (angle - 90);
+            const angleFromCenter = Math.atan2(event.clientY - centerY, event.clientX - centerX) / Math.PI * 180;
+            
+            // Calculate the angle
+            let newAngle = angleFromCenter;
+            newAngle = (newAngle + 90) % 360;
+            
+            // Update the angle without jittering
+            // Prevent large jumps when crossing the 0° mark
+            if (Math.abs(newAngle - angle) > 180) {
+                if (newAngle > angle) {
+                    newAngle -= 360; // Go to negative range
+                } else {
+                    newAngle += 360; // Go to positive range
+                }
+            }
+            
+            // Update the angle
+            angle = newAngle;
+            hand.style.transform = `rotate(${angle}deg)`; // Apply rotation
+            
+            // Calculate minutes based on the angle
+            let minutes = newAngle / 360 * 60;
+            if (minutes === 60) minutes = 0; // Handle 12:00 case
+            minutes = Math.round(minutes);
+            document.getElementById('time-display').innerText = `Timer set to ${minutes} minutes`;
         }
     }
-
-    // Update the angle
-    angle = newAngle;
-    hand.style.transform = `rotate(${angle}deg)`; // Apply rotation
-    
-    // Calculate minutes based on the angle
-    const minutes = Math.round((newAngle / 360) * 60); // Normalize to [0, 60) minutes
-    if (minutes === 60) minutes = 0; // Handle 12:00 case
-    document.getElementById('time-display').innerText = `Timer set to ${minutes} minutes`;
 }
 
 function stopDrag(event) {
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', stopDrag);
+    isDragging = false;
 }
 
 // Initial timer display
