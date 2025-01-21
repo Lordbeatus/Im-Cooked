@@ -25,7 +25,7 @@ function drag(event) {
     // Calculate angle relative to 12:00
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI) - 90;
+    angle = Math.atan2(dy, dx) * (180 / Math.PI);
 
     // Ensure angle stays within 0-360 degrees
     if (angle < 0) {
@@ -46,6 +46,6 @@ function stopDrag(event) {
 document.getElementById('start-timer').addEventListener('click', () => {
     // Convert angle to minutes
     angle = Math.min(angle, 360); // Binds the timer to be only for 1 hour
-    minutes = Math.round(angle / 30) * 5; // 30 degrees per hour, 5 minutes per increment
+    minutes = Math.round(angle / 30) * 5 - 15; // 30 degrees per hour, 5 minutes per increment
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 });
