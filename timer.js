@@ -16,6 +16,9 @@ function drag(event) {
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
     angle = Math.atan2(dy, dx) * (180 / Math.PI); //angle
+    if (angle < 0) {
+        angle += 360;
+    }
     hand.style.transform = `rotate(${angle/sensitivityFactor}deg)`; //Updates the sensitivity
 }
 
@@ -26,5 +29,5 @@ function stopDrag(event) {
 
 document.getElementById('start-timer').addEventListener('click', () => {
     const minutes = Math.round(angle / 30) * 5;
-    alert(`Timer set for ${minutes} minutes`);
+    document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 });
