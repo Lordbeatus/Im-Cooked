@@ -74,7 +74,7 @@ header {
     left: 50%;
     transform-origin: left center; /* Fix one end of the hand */
      /* Start at 12:00 */
-    transform: rotate(270deg);
+    transform: rotate(0deg);
 }
 
 #time-display {
