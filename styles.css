@@ -66,8 +66,8 @@ header {
 }
 
 #hand {
-    width: 100px;
-    height: 10px;
+    width: 10px;
+    height: 100px;
     background-color: red;
     position: absolute;
     top: 50%;
