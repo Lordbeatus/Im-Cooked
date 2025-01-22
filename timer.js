@@ -76,7 +76,7 @@ function startCountdown(minutes) {
 // Start timer and display time
 document.getElementById('start-timer').addEventListener('click', () => {
     // Convert angle to minutes
-    minutes = Math.round(angle / 30) * 5 - 15; // 30 degrees per hour, 5 minutes per increment
+    minutes = Math.round(angle / 30) * 5; // 30 degrees per hour, 5 minutes per increment
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
     startCountdown(minutes);
 });
