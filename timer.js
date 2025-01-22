@@ -28,25 +28,23 @@ function drag(event) {
     // Calculate angle relative to 12:00
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
-    angle = Math.atan2(dy, dx) * (180 / Math.PI);
+    let newAngle = Math.atan2(dy, dx) * (180 / Math.PI);
 
     // Ensure angle stays within 0-360 degrees
-    if (angle < 0) {
-        angle += 360;
-    }
-    if (angle > 360) {
-        angle = angle % 360;
+    if (newAngle < 0) {
+        newAngle += 360;
     }
 
-    // Smooth the rotation to prevent spinning
-    if (Math.abs(angle - lastAngle) > 180) {
-        if (angle > lastAngle) {
-            angle -= 360;
-        } else {
-            angle += 360;
-        }
+    // Calculate the shortest rotation direction
+    const deltaAngle = newAngle - lastAngle;
+    if (deltaAngle > 180) {
+        newAngle -= 360;
+    } else if (deltaAngle < -180) {
+        newAngle += 360;
     }
-    lastAngle = angle;
+
+    angle = newAngle;
+    lastAngle = newAngle % 360;
 
     // Update the hand rotation
     hand.style.transform = `rotate(${angle}deg)`;
