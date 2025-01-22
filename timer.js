@@ -3,6 +3,8 @@ let minutes = 0;
 let angle = 90; // Start at 12:00 (90 degrees)
 let isDragging = false;
 
+// Set the transform origin to the center
+hand.style.transformOrigin = '50% 50%';
 hand.style.transform = `rotate(${angle}deg)`;
 
 // Add event listeners for dragging
