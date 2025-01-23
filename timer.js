@@ -6,6 +6,7 @@ let isDragging = false;
 // Set the transform origin to the left center
 hand.style.transformOrigin = 'left center';
 hand.style.transform = `rotate(${angle}deg)`;
+console.log(`Initial angle: ${angle} degrees`);
 
 // Add event listeners for dragging
 hand.addEventListener('mousedown', startDrag);
@@ -33,6 +34,7 @@ function drag(event) {
 
     angle = newAngle;
     hand.style.transform = `rotate(${angle}deg)`;
+    console.log(`Dragging angle: ${angle} degrees`);
 
     // Calculate the minutes based on the angle
     const adjustedAngle = (angle - 90 + 360) % 360; // Adjust angle to start from 90 degrees
