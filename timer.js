@@ -3,7 +3,8 @@ let minutes = 0;
 let angle = 90; // Start at 12:00 (90 degrees)
 let isDragging = false;
 
-// Set the transform origin to the center
+// Ensure the clock hand element has its transform origin set correctly.
+// Set the transform origin to the center of the element
 hand.style.transformOrigin = '50% 50%';
 hand.style.transform = `rotate(${angle}deg)`;
 
