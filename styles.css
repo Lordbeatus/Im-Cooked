@@ -72,7 +72,7 @@ header {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform-origin: 50% 50%; /* Center the hand */
+    transform-origin: left center; /* Fix one end of the hand */
     transform: rotate(0deg); /* Start at 12:00 */
 }
 
