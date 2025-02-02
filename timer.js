@@ -37,8 +37,7 @@ function drag(event) {
     console.log(`Dragging angle: ${angle} degrees`);
 
     // Calculate the minutes based on the angle
-    const adjustedAngle = (angle - 90 + 360) % 360; // Adjust angle to start from 90 degrees
-    minutes = Math.round(adjustedAngle / 30) * 5; // 30 degrees per 5 minutes
+    minutes = Math.round(angle / 30) * 5; // 30 degrees per 5 minutes
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 }
 
