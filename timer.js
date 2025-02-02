@@ -39,7 +39,7 @@ function drag(event) {
     // Calculate the minutes based on the angle
     minutes = Math.round(angle / 30) * 5 - 45; // 30 degrees per 5 minutes
      if(minutes < 0){
-        minutes += 45;
+        minutes += 15;
     }
 
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
