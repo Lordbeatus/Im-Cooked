@@ -1,10 +1,10 @@
 const hand = document.getElementById('hand');
 let minutes = 0;
-let angle = 90; // Start at 12:00 (90 degrees)
+let angle = 0; // Start at 12:00 (90 degrees)
 let isDragging = false;
 
 // Set the transform origin to the left center
-hand.style.transformOrigin = 'left center';
+hand.style.transformOrigin = 'left';
 hand.style.transform = `rotate(${angle}deg)`;
 console.log(`Initial angle: ${angle} degrees`);
 
