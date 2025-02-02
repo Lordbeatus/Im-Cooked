@@ -21,7 +21,7 @@ function drag(event) {
     if (!isDragging) return;
 
     const rect = hand.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
+    const centerX = rect.left;
     const centerY = rect.top + rect.height / 2;
 
     const dx = event.clientX - centerX;
