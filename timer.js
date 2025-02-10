@@ -3,7 +3,7 @@ let minutes = 0;
 let angle = 0; // Start at 12:00 (0 degrees)
 let isDragging = false;
 
-// Set the transform origin to the left center
+// Set the transform origin to the bottom
 hand.style.transformOrigin = '50% 100%';
 hand.style.transform = `rotate(${angle}deg)`;
 console.log(`Initial angle: ${angle} degrees`);
@@ -15,30 +15,26 @@ function startDrag(event) {
     isDragging = true;
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', stopDrag);
-    
+
     // Capture the initial angle correctly when dragging starts
-    const rect = hand.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height;
-
-    const dx = event.clientX - centerX;
-    const dy = event.clientY - centerY;
-    let initialAngle = Math.atan2(dy, dx) * (180 / Math.PI);
-
-    if (initialAngle < 0) {
-        initialAngle += 360;
-    }
-
-    angle = initialAngle;
-    hand.style.transform = `rotate(${angle}deg)`;
+    updateAngle(event);
 }
 
 function drag(event) {
     if (!isDragging) return;
+    updateAngle(event);
+}
 
+function stopDrag(event) {
+    isDragging = false;
+    document.removeEventListener('mousemove', drag);
+    document.removeEventListener('mouseup', stopDrag);
+}
+
+function updateAngle(event) {
     const rect = hand.getBoundingClientRect();
-    const centerX = rect.left;
-    const centerY = rect.top + rect.height / 2;
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height;
 
     const dx = event.clientX - centerX;
     const dy = event.clientY - centerY;
@@ -50,20 +46,11 @@ function drag(event) {
 
     angle = newAngle;
     hand.style.transform = `rotate(${angle}deg)`;
-    console.log(`Dragging angle: ${angle} degrees`);
+    console.log(`Updated angle: ${angle} degrees`);
 
     // Calculate the minutes based on the angle
     minutes = Math.round(angle / 30) * 5; // 30 degrees per 5 minutes
-
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
-}
-
-   
-
-function stopDrag(event) {
-    isDragging = false;
-    document.removeEventListener('mousemove', drag);
-    document.removeEventListener('mouseup', stopDrag);
 }
 
 document.getElementById('start-timer').addEventListener('click', () => {
