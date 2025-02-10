@@ -15,6 +15,22 @@ function startDrag(event) {
     isDragging = true;
     document.addEventListener('mousemove', drag);
     document.addEventListener('mouseup', stopDrag);
+    
+    // Capture the initial angle correctly when dragging starts
+    const rect = hand.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height;
+
+    const dx = event.clientX - centerX;
+    const dy = event.clientY - centerY;
+    let initialAngle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+    if (initialAngle < 0) {
+        initialAngle += 360;
+    }
+
+    angle = initialAngle;
+    hand.style.transform = `rotate(${angle}deg)`;
 }
 
 function drag(event) {
