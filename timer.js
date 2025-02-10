@@ -43,7 +43,7 @@ function updateAngle(event) {
     if (newAngle < 0) {
         newAngle += 360;
     }
-
+    if (isDragging){
     angle = newAngle;
     hand.style.transform = `rotate(${angle}deg)`;
     console.log(`Updated angle: ${angle} degrees`);
@@ -52,7 +52,7 @@ function updateAngle(event) {
     minutes = Math.round(angle / 30) * 5; // 30 degrees per 5 minutes
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
 }
-
+}
 document.getElementById('start-timer').addEventListener('click', () => {
     document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
     startCountdown(minutes);
