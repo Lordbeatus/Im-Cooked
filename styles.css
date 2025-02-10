@@ -70,7 +70,7 @@ header {
     height: 100px;
     background-color: red;
     position: absolute;
-    top: 15%;
+    top: 10%;
     left: 50%;
     transform-origin: bottom; /* Fix one end of the hand */
     transform: rotate(0deg); /* Start at 12:00 */
