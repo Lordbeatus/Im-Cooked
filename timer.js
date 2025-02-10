@@ -4,7 +4,7 @@ let angle = 0; // Start at 12:00 (0 degrees)
 let isDragging = false;
 
 // Set the transform origin to the left center
-hand.style.transformOrigin = '0% 50%';
+hand.style.transformOrigin = '0% 0%';
 hand.style.transform = `rotate(${angle}deg)`;
 console.log(`Initial angle: ${angle} degrees`);
 
