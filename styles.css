@@ -71,7 +71,7 @@ header {
     background-color: red;
     position: absolute;
     top: 0%;
-    left: 50%;
+    left: 48%;
     transform-origin: bottom; /* Fix one end of the hand */
     transform: rotate(0deg); /* Start at 12:00 */
 }
