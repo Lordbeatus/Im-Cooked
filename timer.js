@@ -1,4 +1,5 @@
 const hand = document.getElementById('hand');
+let hours = 0;
 let minutes = 0;
 let angle = 0; // Start at 12:00 (0 degrees)
 let isDragging = false;
@@ -50,25 +51,27 @@ function updateAngle(event) {
 
     // Calculate the minutes based on the angle
     minutes = Math.round(angle / 30) * 5; // 30 degrees per 5 minutes
-    document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
+    hours = Math.floor(minutes / 60);
+    document.getElementById('time-display').innerText = `Do you want to set the timer for ${hours} hours and ${minutes} minutes`;
 }
 }
 document.getElementById('start-timer').addEventListener('click', () => {
-    document.getElementById('time-display').innerText = `Timer set for ${minutes} minutes`;
-    startCountdown(minutes);
+    document.getElementById('time-display').innerText = `Timer set for ${hours} hours and ${minutes} minutes`;
+    startCountdown(hours, minutes);
 });
 
-function startCountdown(minutes) {
-    let secondsRemaining = minutes * 60;
+function startCountdown(hours, minutes) {
+    let secondsRemaining =  hours * 3600 + minutes * 60;
     const timerInterval = setInterval(() => {
         if (secondsRemaining <= 0) {
             clearInterval(timerInterval);
             alert("Time's up!");
         } else {
             secondsRemaining--;
+            const hoursDisplay = Math.floor(secondsRemaining / 3600);
             const minutesDisplay = Math.floor(secondsRemaining / 60);
             const secondsDisplay = secondsRemaining % 60;
-            document.getElementById('time-display').innerText = `Time remaining: ${minutesDisplay}m ${secondsDisplay}s`;
+            document.getElementById('time-display').innerText = `Time remaining: ${hoursDisplay}h ${minutesDisplay}m ${secondsDisplay}s`;
         }
     }, 1000);
 }
