@@ -45,7 +45,7 @@ function updateAngle(event) {
         newAngle += 360;
     }
     if (isDragging){
-    angle = newAngle;
+    angle += newAngle;
     hand.style.transform = `rotate(${angle}deg)`;
     console.log(`Updated angle: ${angle} degrees`);
 
