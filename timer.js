@@ -50,7 +50,7 @@ function updateAngle(event) {
     console.log(`Updated angle: ${angle} degrees`);
 
     // Calculate the minutes based on the angle
-    minutes = Math.round(angle / 30) * 5; // 30 degrees per 5 minutes
+    minutes = (Math.round(angle / 30) * 5) % 60 ; // 30 degrees per 5 minutes
     hours = Math.floor(minutes / 60);
     document.getElementById('time-display').innerText = `Do you want to set the timer for ${hours} hours and ${minutes} minutes`;
 }
