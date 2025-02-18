@@ -69,7 +69,7 @@ function startCountdown(hours, minutes) {
         } else {
             secondsRemaining--;
             const hoursDisplay = Math.floor(secondsRemaining / 3600);
-            const minutesDisplay = Math.floor(secondsRemaining / 60);
+            const minutesDisplay = Math.floor(secondsRemaining / 60) % 60;
             const secondsDisplay = secondsRemaining % 60;
             document.getElementById('time-display').innerText = `Time remaining: ${hoursDisplay}h ${minutesDisplay}m ${secondsDisplay}s`;
         }
