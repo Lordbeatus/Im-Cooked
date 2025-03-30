@@ -4,7 +4,6 @@ let hours = 0;
 let minutes = 0;
 let angle = 0; // Start at 12:00 (0 degrees)
 let isDragging = false;
-let lastAngle = 0; // Variable to store the last angle
 
 // Set the transform origin to the bottom
 hand.style.transformOrigin = '50% 100%';
@@ -62,8 +61,7 @@ function updateAngle(event) {
     if (isDragging) {
         // Introduce a scaling factor to smooth the spinning
         const scalingFactor = 0.1; // Adjust this value to control sensitivity
-        angle += (newAngle - lastAngle) * scalingFactor;
-        lastAngle = newAngle;
+        angle += newAngle * scalingFactor;
 
         // Apply boundaries to the angle
         if (angle < 0) {
