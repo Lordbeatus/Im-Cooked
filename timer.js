@@ -44,16 +44,19 @@ function updateAngle(event) {
     if (newAngle < 0) {
         newAngle += 360;
     }
-    if (isDragging){
-    angle += newAngle;
-    hand.style.transform = `rotate(${angle}deg)`;
-    console.log(`Updated angle: ${angle} degrees`);
 
-    // Calculate the minutes based on the angle
-    minutes = (Math.round(angle / 30) * 5) % 60 ; // 30 degrees per 5 minutes
-    hours = Math.floor(minutes / 60);
-    document.getElementById('time-display').innerText = `Do you want to set the timer for ${hours} hours and ${minutes} minutes`;
-}
+    if (isDragging) {
+        // Introduce a scaling factor to decrease sensitivity
+        const scalingFactor = 0.1; // Adjust this value to control sensitivity
+        angle += newAngle * scalingFactor;
+        hand.style.transform = `rotate(${angle}deg)`;
+        console.log(`Updated angle: ${angle} degrees`);
+
+        // Calculate the minutes based on the angle
+        minutes = (Math.round(angle / 30) * 5) % 60; // 30 degrees per 5 minutes
+        hours = Math.floor(minutes / 60);
+        document.getElementById('time-display').innerText = `Do you want to set the timer for ${hours} hours and ${minutes} minutes`;
+    }
 }
 document.getElementById('start-timer').addEventListener('click', () => {
     document.getElementById('time-display').innerText = `Timer set for ${hours} hours and ${minutes} minutes`;
