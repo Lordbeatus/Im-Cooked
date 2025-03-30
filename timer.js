@@ -60,7 +60,7 @@ function updateAngle(event) {
 
     if (isDragging) {
         // Introduce a scaling factor to smooth the spinning
-        const scalingFactor = 0.1; // Adjust this value to control sensitivity
+        const scalingFactor = 0.01; // Adjust this value to control sensitivity
         angle += newAngle * scalingFactor;
 
         // Apply boundaries to the angle
