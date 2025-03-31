@@ -54,21 +54,27 @@ function updateAngle(event) {
     const dy = event.clientY - centerY;
     let newAngle = Math.atan2(dy, dx) * (180 / Math.PI);
 
-    if (newAngle < 0) {
-        newAngle += 360;
+    // Calculate the raw angle difference
+    let rawAngleDifference = newAngle - (angle % 360);
+
+    // Adjust for crossing the 0-degree boundary
+    if (rawAngleDifference > 180) {
+        rawAngleDifference -= 360;
+    } else if (rawAngleDifference < -180) {
+        rawAngleDifference += 360;
     }
 
     if (isDragging) {
+        // Prevent backward movement at 0 degrees
+        if (angle === 0 && rawAngleDifference < 0) {
+            return; // Do nothing if trying to go backward at 0 degrees
+        }
+
         // Introduce a scaling factor to smooth the spinning
         const scalingFactor = 0.01; // Adjust this value to control sensitivity
-        angle += newAngle * scalingFactor;
+        angle += rawAngleDifference * scalingFactor;
 
-        // Apply boundaries to the angle
-        if (angle < 0) {
-            angle += 360;
-        } else if (angle >= 360) {
-            angle -= 360;
-        }
+
 
         hand.style.transform = `rotate(${angle}deg)`;
         console.log(`Updated angle: ${angle} degrees`);
