@@ -71,17 +71,20 @@ function updateAngle(event) {
         }
 
         // Introduce a scaling factor to smooth the spinning
-        const scalingFactor = 0.01; // Adjust this value to control sensitivity
+        const scalingFactor = 0.05; // Adjust this value to control sensitivity
         angle += rawAngleDifference * scalingFactor;
 
+        angle = Math.max(0, angle); // Prevent negative angles
 
-
-        hand.style.transform = `rotate(${angle}deg)`;
+        if (angle  > 0){
+            hand.style.transform = `rotate(${angle % 360}deg)`;
         console.log(`Updated angle: ${angle} degrees`);
-
+        }
         // Calculate the minutes based on the angle
         minutes = (Math.round(angle / 30) * 5) % 60; // 30 degrees per 5 minutes
-        hours = Math.floor(minutes / 60);
+        hours = Math.floor(angle / 360);
+        hours = Math.max(hours, 0); 
+        minutes = Math.max(minutes, 0); 
         document.getElementById('time-display').innerText = `Do you want to set the timer for ${hours} hours and ${minutes} minutes`;
     }
 }
