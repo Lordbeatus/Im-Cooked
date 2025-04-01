@@ -28,7 +28,7 @@ header {
 }
 
 .logo-text-link {
-  text-decoration: underline; /* Remove underline from link */
+  text-decoration: none; /* Remove underline from link */
   color: inherit; /* Inherit text color from parent */
 }
 
