@@ -108,7 +108,7 @@ header {
   left: 0;
   width: 150%;
   height: calc(100% - 80px); /* Adjust this value according to the height of your header */
-  background-image: url('/Images/shopinterface.png');
+  background-image: url('shopinterface2.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
