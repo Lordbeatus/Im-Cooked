@@ -87,3 +87,16 @@ header {
     padding-top: 5px;
     font-size: 16px;
 }
+
+.shop-background {
+  position: absolute;
+  top: 80px; /* Adjust this value according to the height of your header */
+  left: 0;
+  width: 100%;
+  height: calc(100% - 80px); /* Adjust this value according to the height of your header */
+  background-image: url('/Images/shopinterface.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1; /* Ensure it is behind other content */
+}
