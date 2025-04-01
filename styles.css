@@ -14,8 +14,17 @@ header {
     color: white;
 }
 
-.logo h1 {
-    margin: 0;
+.logo {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
+
+.logo img {
+  margin-right: 10px; /* Add space between the image and the text */
+}
+
+.logo-text {
+  margin: 0; /* Remove default margin from h1 */
 }
 
 .utility-nav ul {
