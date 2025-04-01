@@ -106,11 +106,17 @@ header {
   position: absolute;
   top: 80px; /* Adjust this value according to the height of your header */
   left: 0;
-  width: 300%;
+  width: 100%;
   height: calc(100% - 80px); /* Adjust this value according to the height of your header */
   background-image: url('shopinterface2.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   z-index: -1; /* Ensure it is behind other content */
+}
+
+.shop-image {
+  width: 100%; /* Adjust the width as required */
+  height: 300px; /* Fixed height or you can adjust as per your need */
+  object-fit: cover; /* The image will cover the container, maintaining aspect ratio */
 }
