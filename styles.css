@@ -27,6 +27,11 @@ header {
   margin: 0; /* Remove default margin from h1 */
 }
 
+.logo-text-link {
+  text-decoration: none; /* Remove underline from link */
+  color: inherit; /* Inherit text color from parent */
+}
+
 .utility-nav ul {
     list-style: none;
     margin: 0;
